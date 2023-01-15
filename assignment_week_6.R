@@ -16,6 +16,7 @@ turtle_sales
 turtle_sales <- select(turtle_sales, -Ranking, -Year, -Genre, -Publisher)
 
 
+
 # Use the summary() function.
 summary(turtle_sales)
 
@@ -26,6 +27,7 @@ turtle_sales[is.na(turtle_sales)]
 head(turtle_sales)
 
 sapply(turtle_sales, mode)
+
 
 
 ###############################################################################
@@ -51,6 +53,7 @@ model1 <- lm(Global_Sales~Product,
 model1
 
 
+
 # View more outputs for the model - the full regression table.
 summary(model1)
 
@@ -59,6 +62,7 @@ summary(model1)
 
 # View residuals on a plot.
 plot(model1$residuals)
+
 
 
 # Plot the relationship with base R graphics.
@@ -87,6 +91,7 @@ model2 <- lm(logProduct~Global_Sales,
 
 # View full regression table.
 summary(model2)
+
 
 
 # Plot the relationship between Global_Sales and logProduct.
@@ -151,12 +156,12 @@ summary(modelb)
 
  
 # 5. Observations and insights
-# we were able to observe closely how the national sales and eurepean sales were different audience market compared to global scale.
+# we were able to observe closely how the north american sales and eurepean sales were different audience market compared to global scale.
 # still the major buyer in all the market were inclined towards eurepean market.
-# based on the data below we can see how national sales was major section of Eurepean sales.
-# national sales number reflected that this data closely linked and can also be seen in the signifcance scoring of model a with rating of 2 and 3 star
+# based on the data below we can see how northe american sales was major section of Eurepean sales.
+# northern sales number reflected that this data closely linked and can also be seen in the signifcance scoring of model a with rating of 2 and 3 star
 # the turtle games has a new front in terms of exploring the global market base
-# but with the relative results from regressions and numbers reflecting that the local national market is something where they did good
+# but with the relative results from regressions and numbers reflecting that the  north american  market is something where they did good
 # but the european market needs some figuring out as the sales such vast continent can bring some good business 
 
 # NA_Sales_sum of 34.02 and EU_Sales_sum of 23.80.
