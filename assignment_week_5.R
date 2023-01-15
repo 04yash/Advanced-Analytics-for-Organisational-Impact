@@ -17,6 +17,7 @@ turtle_sales
 # Remove the '' and 'region' columns.
 turtle_sales <- select(turtle_sales, -Ranking, -Year, -Genre, -Publisher)
 
+
 # Check the new data frame.
 head(turtle_sales)
 
@@ -106,12 +107,27 @@ cor(turtle_sales$EU_Sales, turtle_sales$NA_Sales)
 
 # Create a scatterplot to view result.
 ggplot(turtle_sales, 
-       mapping=aes(x= Product, y=Global_Sales, col=Platform)) +
-  geom_point() + scale_x_continuous(breaks=seq(0, 70, 5), "Number of Products") +
-  scale_y_continuous(breaks=seq(0, 55000, 5000), "Global_Sales")
+       mapping=aes(x= Global_Sales, y=Product, col=Platform)) +
+  geom_point() + scale_x_continuous(breaks=seq(0, 70, 5), "Global Sales") +
+  scale_y_continuous(breaks=seq(0, 55000, 5000), "Number of products")
 
-# We have chosen the BMI vs smoker plot.
-ggplot(turtle_sales, aes(x=Platform, y=Product)) +
+
+# Create a scatterplot to view result.
+ggplot(turtle_sales, 
+       mapping=aes(x= EU_Sales, y=Product, col=Platform,)) +
+  geom_point() + scale_x_continuous(breaks=seq(0, 70, 5), "European Sales") +
+  scale_y_continuous(breaks=seq(0, 55000, 5000), "Number of Product")
+
+# Create a scatterplot to view result.
+ggplot(turtle_sales, 
+       mapping=aes(x= EU_Sales, y=Product, col=Platform)) +
+  geom_point() + scale_x_continuous(breaks=seq(0, 70, 5), "North american Sales") +
+  scale_y_continuous(breaks=seq(0, 55000, 5000), "Number of Product")
+
+
+
+# We have chosen the Platform vs Product plot.
+ggplot(turtle_sales, aes(x=Platform, y=Product,)) +
   geom_boxplot(fill='yellow',
                notch=TRUE,
                outlier.color='blue')
@@ -127,18 +143,79 @@ ggplot(turtle_sales,
              alpha=0.75,
              size=2.5) +
   # Add labels and change axes marks.
-  scale_x_continuous(breaks=seq(0, 70, 5), "National Sales") +
+  scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
   scale_y_continuous(breaks=seq(0, 55000, 5000), "European Sales") +
   # Add a title and subtitle.
-  labs(title="Relationship between national and european data",
+  labs(title="Relationship between north american and european data",
        subtitle=" the sales number are not that different") +
   # Facet by product.
   facet_wrap(~Platform)
 
+
+# Change colours, adjust size and alpha of points.
+ggplot(turtle_sales,
+       mapping=aes(x=NA_Sales, y=Product)) +
+  geom_point(color='red',
+             alpha=0.75,
+             size=2.5) +
+  # Add labels and change axes marks.
+  scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
+  scale_y_continuous(breaks=seq(0, 55000, 5000), "Product") +
+  # Add a title and subtitle.
+  labs(title="Relationship between north american sales and product purchase",
+       subtitle=" the product purchase across north america ") +
+  # Facet by product.
+  facet_wrap(~Platform)
+
+# Change colours, adjust size and alpha of points.
+ggplot(turtle_sales,
+       mapping=aes(x=Global_Sales, y=Product)) +
+  geom_point(color='orange',
+             alpha=0.75,
+             size=2.5) +
+  # Add labels and change axes marks.
+  scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
+  scale_y_continuous(breaks=seq(0, 55000, 5000), "Product") +
+  # Add a title and subtitle.
+  labs(title="Relationship between north american sales and product purchase",
+       subtitle=" the product purchase across north america ") +
+  # Facet by product.
+  facet_wrap(~Platform)
+
+# Change colours, adjust size and alpha of points.
+ggplot(turtle_sales,
+       mapping=aes(x=EU_Sales, y=Product)) +
+  geom_point(color='green',
+             alpha=0.75,
+             size=2.5) +
+  # Add labels and change axes marks.
+  scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
+  scale_y_continuous(breaks=seq(0, 55000, 5000), "Product") +
+  # Add a title and subtitle.
+  labs(title="Relationship between north american sales and product purchase",
+       subtitle=" the product purchase across north america ") +
+  # Facet by product.
+  facet_wrap(~Platform)
+
+
+# Any relationship between Platform, EU_Sales, and NA_Sales?
+# View the third plot.
+qplot(NA_Sales,
+      EU_Sales,
+      colour=Platform,
+      data=turtle_sales,
+      geom='boxplot')
+     
+ggplot(data = turtle_sales, aes(x = Product , y =Platform , size = NA_Sales,colour=EU_Sales,)) +
+  geom_line()
+
+ 
+
+
 # Observations and Insights
 
-# the first thing we notice when we sum and compare  the data points of national sales and european sales is that the number are very much in proximity.
-# we can establish that turtle games have a good national sales in comparison to european market.
+# the first thing we notice when we sum and compare  the data points of north american sales and european sales is that the number are very much in proximity.
+# we can establish that turtle games have a good north american sales in comparison to european market.
 # the global scale market is huge and bring in lot of numbers
 # the product numbers in global sales will go higher but in different platforms
 # people are experimenting with technology and new fronts of enjoyment are being explored by everyone as can be seen in scatterplots with various outlooks
