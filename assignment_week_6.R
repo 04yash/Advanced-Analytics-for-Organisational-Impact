@@ -101,6 +101,18 @@ plot(turtle_sales$Global_Sales, turtle_sales$logProduct)
 # Add a line-of-best fit to existing plot.
 abline(coefficients(model2))
 
+turtle_sales <-mutate(turtle_sales,logindex=log(Product))
+
+head(turtle_sales)
+
+model12<-lm(logindex~Product,data=turtle_sales)
+
+summary(model12)
+plot(turtle_sales$Product,turtle_sales$logindex)
+abline(coefficients(model12))
+tail(turtle_sales)
+predict(model12,turtle_sales)
+
 
 # multiple linear regression 
 
@@ -133,12 +145,17 @@ library(psych)
 # character size (cex=2).
 corPlot(stock, cex=2)
 
+
 # Create a new object and 
 # specify the lm function and the variables.
 modela = lm(Product~NA_Sales+EU_Sales, data=stock)
 
 # Print the summary statistics.
 summary(modela)
+
+# Load the new data file (turtle_sales.csv) and view its structure.
+turtle_sales <- read.csv(file.choose(), header=TRUE)
+
 
 # Add new variables.
 modelb = lm(Product~NA_Sales+EU_Sales+Global_Sales,
@@ -147,6 +164,19 @@ modelb = lm(Product~NA_Sales+EU_Sales+Global_Sales,
 # Change the model name.
 summary(modelb)
 
+# Load the new data file (turtle_Sales.csv) and view its structure.
+stock1 <- read.csv(file.choose(), header=TRUE)
+
+# View the data.
+str(stock1)
+
+# Create a new object and specify the predict function.
+predictTest = predict(modelb, newdata=stock1,
+                      interval='confidence')
+
+# Print the object.
+predictTest
+turtle_sales
 
 #  Predictions based on given values
 # as it can be seen that modela is  better then modellb 
@@ -157,10 +187,14 @@ summary(modelb)
  
 # 5. Observations and insights
 # we were able to observe closely how the north american sales and eurepean sales were different audience market compared to global scale.
-# still the major buyer in all the market were inclined towards eurepean market.
-# based on the data below we can see how northe american sales was major section of Eurepean sales.
-# northern sales number reflected that this data closely linked and can also be seen in the signifcance scoring of model a with rating of 2 and 3 star
-# the turtle games has a new front in terms of exploring the global market base
+# some new platform sales in all the markets is a good sign as it shows that customers are transitioning towards new experiences.
+# when used the linear regression on product numbers the data suggested that p value was very small and hence the product was a signifcant variable.
+# we used the logindex function on product to better adjust new r value value which changed from 19.44% to 42.11%
+# after mutating the logproduct value the new adjusted value came up to 79.83% and p value became even smaller
+# the abline on the new logproduct was adjusted and had all the data points around the line 
+# after doing multiple regression on the combined data set of sales data against the product we could se that first value was 2829 which after prediction was in lwr range 2966 close to the actual value and the first predicted value was 3549 uper value was in 4132 and as follows
+# the new plotted abcoeffecintline on model 12 shows the adjusted line and linear data.
+# the turtle games has a new front in terms of exploring the overall market base with new platforms doing really good and especially targeting certain platforms in certain market zones such as NES,Wii,GB,GBA,SNES doing really well in north american market space.
 # but with the relative results from regressions and numbers reflecting that the  north american  market is something where they did good
 # but the european market needs some figuring out as the sales such vast continent can bring some good business 
 
