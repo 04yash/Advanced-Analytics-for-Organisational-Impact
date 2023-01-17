@@ -75,17 +75,26 @@ hist(turtle_sales$Product)
 
 # Specify qqnorm function (draw a qqplot).
 qqnorm(turtle_sales$Product)
+qqnorm(turtle_sales$Global_Sales)
+qqnorm(turtle_sales$EU_Sales)
+qqnorm(turtle_sales$NA_Sales)
+
 
 # Specify qqline function.
 qqline(turtle_sales$Product) 
+qqline(turtle_sales$Global_Sales) 
+qqline(turtle_sales$EU_Sales) 
+qqline(turtle_sales$NA_Sales)
+
 
 
 
 ## Shapiro-Wilk test:
 # Specify shapiro.test function (Shapiro-Wilk test).
 shapiro.test(turtle_sales$Product)
-
-
+shapiro.test(turtle_sales$Global_Sales)
+shapiro.test(turtle_sales$EU_Sales)
+shapiro.test(turtle_sales$NA_Sales)
 ## Skewness and Kurtosis
 # Install the moments package and load the library.
 install.packages('moments') 
@@ -114,13 +123,13 @@ ggplot(turtle_sales,
 
 # Create a scatterplot to view result.
 ggplot(turtle_sales, 
-       mapping=aes(x= EU_Sales, y=Product, col=Platform,)) +
+       mapping=aes(x= EU_Sales, y=Product, col=Platform)) +
   geom_point() + scale_x_continuous(breaks=seq(0, 70, 5), "European Sales") +
   scale_y_continuous(breaks=seq(0, 55000, 5000), "Number of Product")
 
 # Create a scatterplot to view result.
 ggplot(turtle_sales, 
-       mapping=aes(x= EU_Sales, y=Product, col=Platform)) +
+       mapping=aes(x= NA_Sales, y=Product, col=Platform)) +
   geom_point() + scale_x_continuous(breaks=seq(0, 70, 5), "North american Sales") +
   scale_y_continuous(breaks=seq(0, 55000, 5000), "Number of Product")
 
@@ -138,7 +147,7 @@ ggplot(turtle_sales, aes(x=Platform, y=Product,)) +
 
 # Change colours, adjust size and alpha of points.
 ggplot(turtle_sales,
-       mapping=aes(x=NA_Sales, y=EU_Sales)) +
+       mapping=aes(x=NA_Sales, y=EU_Sales,)) +
   geom_point(color='purple',
              alpha=0.75,
              size=2.5) +
@@ -146,7 +155,7 @@ ggplot(turtle_sales,
   scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
   scale_y_continuous(breaks=seq(0, 55000, 5000), "European Sales") +
   # Add a title and subtitle.
-  labs(title="Relationship between north american and european data",
+  labs(title="Relationship between north american and european data on various platform",
        subtitle=" the sales number are not that different") +
   # Facet by product.
   facet_wrap(~Platform)
@@ -162,7 +171,7 @@ ggplot(turtle_sales,
   scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
   scale_y_continuous(breaks=seq(0, 55000, 5000), "Product") +
   # Add a title and subtitle.
-  labs(title="Relationship between north american sales and product purchase",
+  labs(title="Relationship between north american sales and product purchase on various platform",
        subtitle=" the product purchase across north america ") +
   # Facet by product.
   facet_wrap(~Platform)
@@ -174,11 +183,11 @@ ggplot(turtle_sales,
              alpha=0.75,
              size=2.5) +
   # Add labels and change axes marks.
-  scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
+  scale_x_continuous(breaks=seq(0, 70, 5), "Global  Sales") +
   scale_y_continuous(breaks=seq(0, 55000, 5000), "Product") +
   # Add a title and subtitle.
-  labs(title="Relationship between north american sales and product purchase",
-       subtitle=" the product purchase across north america ") +
+  labs(title="Relationship between Global sales and product purchase across the platform",
+       subtitle=" the product purchase across  the globe ") +
   # Facet by product.
   facet_wrap(~Platform)
 
@@ -189,11 +198,11 @@ ggplot(turtle_sales,
              alpha=0.75,
              size=2.5) +
   # Add labels and change axes marks.
-  scale_x_continuous(breaks=seq(0, 70, 5), "North American Sales") +
+  scale_x_continuous(breaks=seq(0, 70, 5), "European Sales") +
   scale_y_continuous(breaks=seq(0, 55000, 5000), "Product") +
   # Add a title and subtitle.
-  labs(title="Relationship between north american sales and product purchase",
-       subtitle=" the product purchase across north america ") +
+  labs(title="Relationship between European sales and product purchase on various gaming platform",
+       subtitle=" the product purchase across European Sales ") +
   # Facet by product.
   facet_wrap(~Platform)
 
@@ -204,12 +213,24 @@ qplot(NA_Sales,
       EU_Sales,
       colour=Platform,
       data=turtle_sales,
-      geom='boxplot')
+      geom='boxplot') 
      
 ggplot(data = turtle_sales, aes(x = Product , y =Platform , size = NA_Sales,colour=EU_Sales,)) +
   geom_line()
 
- 
+
+# Any relationship between Platform, Global_Sales, and NA_Sales?
+# View the third plot.
+qplot(NA_Sales,
+      Global_Sales,
+      colour=Platform,
+      data=turtle_sales,
+      geom='boxplot') 
+
+ggplot(data = turtle_sales, aes(x = Product , y =Platform , size = Global_Sales,colour=NA_Sales,)) +
+  geom_line()
+ggplot(data = turtle_sales, aes(x = Product , y =Platform , size = NA_Sales,colour=Global_Sales)) +
+  geom_line()
 
 
 # Observations and Insights
@@ -222,4 +243,7 @@ ggplot(data = turtle_sales, aes(x = Product , y =Platform , size = NA_Sales,colo
 # overall the market for pc and ps4 and x360  is not going anywhere they have there sales and need to capitalized
 # overall the data sales suggest the sales data in over 40 years has changed a lot of new variation of consoles and other enjoyable tech is available at hand 
 # the growth of gaming industry seems to be splattering in global sales hence the turtle team needs to focus on the market space and their requirement.
-
+# overall we can see wii sales did really well in on the markets be it global , north american, european.
+# the comparison between north american and global sales the platforms sales of Wii,NES,GB,DS, performed better in north american market in comparsion to their sales in north america
+# while comparing platforms sales in north american and European market the Wii platform had bigger sales number in european market in comparison to north american market.
+# Sales number of gaming consoles platforms such as gameboy, nintendo DS, SNES,GBA were also surprising across all the market and hence these platforms are becoming a strong competition for established platforms like playstation,x360 and pc. 
